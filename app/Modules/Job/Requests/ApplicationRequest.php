@@ -25,9 +25,16 @@ class ApplicationRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:255'],
             'last_name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
-            'regex:/^(?:\+234|0)[789][01]\d{8}$/',
+            'phone_number' => ['required', 'string', 'regex:/^(?:\+234|0)[789][01]\d{8}$/'],
             'location' => ['required', 'string', 'max:255'],
             'document' => ['required', 'file', 'mimes:pdf,docx', 'max:2048']
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'phone_number.regex' => 'The phone number must be a valid Nigerian number starting with +234 or 0, followed by a valid prefix 7, 8 or 9.',
         ];
     }
 }
